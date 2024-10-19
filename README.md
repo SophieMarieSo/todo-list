@@ -45,6 +45,16 @@ Api Test `Postman`
 
 ---
 
+### 프론트엔드 준비
+
+1. 깃 clone
+2. 기능 만들기 (CRUD)
+3. 테스트
+
+(forked from https://github.com/legobitna/todoapp-fe-for-student)
+
+---
+
 ### 배포
 
 1. DB 배포 `MongonDb Atlas`
