@@ -34,8 +34,6 @@
 
 프론트엔드 `React` `Axios`
 
-Api Test `Postman`
-
 ---
 
 ### API 정의
