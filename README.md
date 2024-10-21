@@ -67,8 +67,8 @@
 
 ### 배포
 
-1. DB 배포 `MongonDb Atlas`
-2. 백엔드 배포 `AWS BeanStalk`
+1. DB 배포 `MongonDB Atlas`
+2. 백엔드 배포 `Heroku`
 3. 프론트엔드 배포 `Netlify`
 
 [todo list site](https://inquisitive-pothos-3bcc17.netlify.app/)
