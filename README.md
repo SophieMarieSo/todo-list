@@ -61,7 +61,7 @@
 2. 기능 만들기 (CRUD)
 3. 테스트
 
-(forked from https://github.com/legobitna/todoapp-fe-for-student)
+(forked from https://github.com/legobitna/todo-fe-login-student)
 
 ---
 
