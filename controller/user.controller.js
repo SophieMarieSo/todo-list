@@ -26,4 +26,25 @@ userController.createUser = async (req, res) => {
   }
 };
 
+userController.loginWithEmail = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // 이메일 정보로 유저정보 가져오기
+    const user = await User.findOne({ email }, '-createdAt -updatedAt -__v');
+    if (user) {
+      // 사용자가 보낸 비밀번호와 데이터베이스에 있는 비밀번호가 같은지 확인
+      const isMatch = bcrypt.compareSync(password, user.password);
+      if (isMatch) {
+        // 토큰 발행
+        const token = user.generateToken();
+        return res.status(200).json({ status: 'ok', user, token });
+      }
+    }
+    throw new Error('아이디 또는 비밀번호가 일치하지 않습니다');
+  } catch (error) {
+    res.status(400).json({ status: 'fail', error });
+  }
+};
+
 module.exports = userController;
