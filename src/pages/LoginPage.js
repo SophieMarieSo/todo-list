@@ -29,7 +29,7 @@ const LoginPage = () => {
         throw new Error(resp.message);
       }
     } catch (error) {
-      setError('아이디 또는 비밀번호가 일치하지 않습니다');
+      setError(error.message);
     }
   };
 

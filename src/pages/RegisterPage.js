@@ -32,10 +32,13 @@ const RegisterPage = () => {
         email: form.email,
       };
       const resp = await api.post('/user', data);
+      console.log('====================================');
+      console.log(resp);
+      console.log('====================================');
       if (resp.status === 200) {
         navigate('/login');
       } else {
-        throw new Error(resp.data.Error);
+        throw new Error(resp.message);
       }
     } catch (error) {
       setError(error.message);
@@ -51,6 +54,7 @@ const RegisterPage = () => {
           <Form.Label>Name</Form.Label>
           <Form.Control
             type='string'
+            required
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
         </Form.Group>
@@ -59,6 +63,7 @@ const RegisterPage = () => {
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type='email'
+            required
             onChange={(e) => setForm({ ...form, email: e.target.value })}
           />
         </Form.Group>
@@ -67,6 +72,7 @@ const RegisterPage = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
+            required
             onChange={(e) => setForm({ ...form, password: e.target.value })}
           />
         </Form.Group>
@@ -75,6 +81,7 @@ const RegisterPage = () => {
           <Form.Label>re-enter the password</Form.Label>
           <Form.Control
             type='password'
+            required
             onChange={(e) =>
               setForm({ ...form, reEnterPassword: e.target.value })
             }
