@@ -1,11 +1,11 @@
-import React from "react";
-import TodoItem from "./TodoItem";
+import React from 'react';
+import TodoItem from './TodoItem';
 
 const TodoBoard = ({ todoList, deleteItem, toggleComplete }) => {
   return (
     <div>
       <h2>Todo List</h2>
-      {todoList.length > 0 &&
+      {todoList.length > 0 ? (
         todoList.map((item, index) => (
           <TodoItem
             item={item}
@@ -13,7 +13,10 @@ const TodoBoard = ({ todoList, deleteItem, toggleComplete }) => {
             deleteItem={deleteItem}
             toggleComplete={toggleComplete}
           />
-        ))}
+        ))
+      ) : (
+        <span>no data</span>
+      )}
     </div>
   );
 };

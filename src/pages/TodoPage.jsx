@@ -1,33 +1,39 @@
-import React, { useEffect, useState } from "react";
-import TodoBoard from "../components/TodoBoard";
-import api from "../utils/api";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
+import React, { useEffect, useState } from 'react';
+import TodoBoard from '../components/TodoBoard';
+import api from '../utils/api';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
-const TodoPage = () => {
+const TodoPage = ({ user, setUser }) => {
   const [todoList, setTodoList] = useState([]);
-  const [todoValue, setTodoValue] = useState("");
+  const [todoValue, setTodoValue] = useState('');
+  const navigate = useNavigate();
 
   const getTasks = async () => {
-    const response = await api.get("/tasks");
+    const response = await api.get('/tasks');
     setTodoList(response.data.data);
   };
+
   useEffect(() => {
     getTasks();
   }, []);
+
   const addTodo = async () => {
     try {
-      const response = await api.post("/tasks", {
+      const response = await api.post('/tasks', {
         task: todoValue,
         isComplete: false,
       });
+
       if (response.status === 200) {
         getTasks();
       }
-      setTodoValue("");
+      setTodoValue('');
     } catch (error) {
-      console.log("error:", error);
+      console.log('error:', error);
     }
   };
 
@@ -39,7 +45,7 @@ const TodoPage = () => {
         getTasks();
       }
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
     }
   };
 
@@ -53,28 +59,44 @@ const TodoPage = () => {
         getTasks();
       }
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
     }
   };
+
+  const logout = () => {
+    sessionStorage.removeItem('token');
+    setUser(null);
+    navigate('/login');
+  };
+
   return (
     <Container>
-      <Row className="add-item-row">
+      <Row className='title'>
+        <Col xs={12} sm={10}>
+          <h2>{`Welcome ${user.name}`}</h2>
+        </Col>
+        <Col xs={12} sm={2}>
+          <Button onClick={logout} className='button-logout'>
+            logout
+          </Button>
+        </Col>
+      </Row>
+      <Row className='add-item-row'>
         <Col xs={12} sm={10}>
           <input
-            type="text"
-            placeholder="할일을 입력하세요"
+            type='text'
+            placeholder='할일을 입력하세요'
             onChange={(event) => setTodoValue(event.target.value)}
-            className="input-box"
+            className='input-box'
             value={todoValue}
           />
         </Col>
         <Col xs={12} sm={2}>
-          <button onClick={addTodo} className="button-add">
+          <Button onClick={addTodo} className='button-add'>
             추가
-          </button>
+          </Button>
         </Col>
       </Row>
-
       <TodoBoard
         todoList={todoList}
         deleteItem={deleteItem}
