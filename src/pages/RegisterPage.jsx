@@ -32,9 +32,6 @@ const RegisterPage = () => {
         email: form.email,
       };
       const resp = await api.post('/user', data);
-      console.log('====================================');
-      console.log(resp);
-      console.log('====================================');
       if (resp.status === 200) {
         navigate('/login');
       } else {
